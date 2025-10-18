@@ -8,7 +8,7 @@ import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { Card as HeroCard, CardBody } from '@heroui/card'
 
 
-export default function Card({ card, index, columnId }: { card: { id: string, title: string }, index: number, columnId: string }) {
+export default function Card({ card}: { card: { id: string, title: string }, index: number, columnId: string }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: card.id
   })
@@ -19,6 +19,8 @@ export default function Card({ card, index, columnId }: { card: { id: string, ti
     transition,
     zIndex: isDragging ? 999 : undefined
   }
+
+
 
   return (
     <motion.div

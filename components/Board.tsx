@@ -18,7 +18,7 @@ export default function Board() {
   const { getSnapshot, apply, undo, redo, reset, addColumn } = useBoardStore()
   const snapshot = getSnapshot()
   const { columns, cards } = snapshot
-
+  
   // --- State for Add Column Modal ---
   const [isAddModalOpen, setAddModalOpen] = useState(false)
   const [newColumnTitle, setNewColumnTitle] = useState('')

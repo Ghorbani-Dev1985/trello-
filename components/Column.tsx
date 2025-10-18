@@ -8,15 +8,8 @@ import {
 import Card from "./Card";
 import useBoardStore from "../store/useBoardStore";
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "@heroui/modal";
 import { Input } from "@heroui/input";
-import { Button } from "@heroui/button";
+
 import TrelloModal from "./TrelloModal";
 
 export default function Column({

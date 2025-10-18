@@ -146,40 +146,30 @@ const useBoardStore = create<State>((set, get) => {
     apply(next)
   }
 
-  const editCard = (cardId: string, title: string) => {
-    const snap = getSnapshot()
-    if (!snap.cards[cardId]) return
-    
-    const next: BoardSnapshot = {
-      columns: { ...snap.columns },
-      cards: { ...snap.cards }
-    }
-    
-    next.cards[cardId] = { ...next.cards[cardId], title }
-    apply(next)
-  }
+const editCard = (cardId: string, title: string) => {
+  const snap = getSnapshot()
+  if (!snap.cards[cardId]) return
 
-  const deleteCard = (cardId: string) => {
-    const snap = getSnapshot()
-    if (!snap.cards[cardId]) return
-    
-    const next: BoardSnapshot = {
-      columns: { ...snap.columns },
-      cards: { ...snap.cards }
-    }
-    
-    delete next.cards[cardId]
-    
-    // Remove card from all columns
-    Object.keys(next.columns).forEach(colId => {
-      next.columns[colId] = {
-        ...next.columns[colId],
-        cardIds: next.columns[colId].cardIds.filter(id => id !== cardId)
-      }
-    })
-    
-    apply(next)
-  }
+  const next: BoardSnapshot = structuredClone(snap)
+  next.cards[cardId].title = title
+  apply(next)
+}
+
+
+const deleteCard = (cardId: string) => {
+  const snap = getSnapshot()
+  if (!snap.cards[cardId]) return
+
+  const next: BoardSnapshot = structuredClone(snap) 
+
+  delete next.cards[cardId]
+
+  Object.keys(next.columns).forEach(colId => {
+    next.columns[colId].cardIds = next.columns[colId].cardIds.filter(id => id !== cardId)
+  })
+
+  apply(next)
+}
 
   const addColumn = (title: string) => {
     const snap = getSnapshot()
