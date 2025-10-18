@@ -25,7 +25,6 @@ export default function Column({
   const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
-  const [deleteCartTitle, setDeleteCartTitle] = useState("");
 
   const handleAddCard = () => {
     if (newCardTitle.trim()) {
@@ -89,18 +88,31 @@ export default function Column({
           onChange={(e) => setNewCardTitle(e.target.value)}
           autoFocus
         />
+        <p className="text-sm text-gray-500 mt-2">
+          Adding to: <strong>{column.title}</strong>
+        </p>
       </TrelloModal>
 
       {/* Delete Confirmation Modal */}
       <TrelloModal
         isOpen={isDeleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
-        title="Delete Card"
-        confirmLabel="Delete Cart"
+        title="Delete Column"
+        confirmLabel="Delete Column"
         confirmColor="danger"
         onConfirm={handleDeleteColumn}
       >
-        <p className="text-gray-700">Are you sure for delete card?</p>
+        <div className="text-center">
+          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+            <TrashIcon className="h-6 w-6 text-red-600" />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">
+            Delete Column
+          </h3>
+          <p className="text-sm text-gray-500">
+            Are you sure you want to delete the column "<strong>{column.title}</strong>"?
+          </p>
+        </div>
       </TrelloModal>
     </div>
   );
